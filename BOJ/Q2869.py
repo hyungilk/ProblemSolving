@@ -1,3 +1,7 @@
+# author : hyungil ed kim
+# date : 21.03.12
+# Quiz from : https://www.acmicpc.net/problem/2869
+
 up, down, h =map(int, input().split())
 
 # 숫자 올림 함수 
