@@ -1,24 +1,47 @@
-#재귀함수 run time error 제한
+
+
 import sys
-sys.setrecursionlimit(1000)
+sys.setrecursionlimit(10000)
 
-# 입력 
-n = int(input())
-# n = 3
-# 크기에 맞는 list 생성 - 초기값 '*' 로 채우기
-star = [['*']*n for _ in range(n)]
-# print(star) 
+starArr = []
+def starMark(n):
+    global starArr
+    for _ in range(n):
+        starArr.append(['*']*n)
+    
+    # count '3' 
+    cnt = 1
+    cnt_temp = n
+    while cnt_temp != 1:
+        cnt += 1
+        cnt_temp /= 3
 
-# 3의 제곱수 체크 -> 
-expo_chk = n
-cnt = 0
-while expo_chk != 1:
-    expo_chk // 3
-    cnt += 1
+    if n == 1:
+        return starArr
+    
+    # 3의 지수 만큼 프랙탈이 반복
+    # e.g. 
+    # n = 9 일떄, 3**2 -> 9프랙탈, 3프랙탈
+    # n = 27 일떄, 3**3 -> 27프랙탈, 9프랙탈, 3프랙탈
+    for i in range(cnt):
+        # 단위 프랙탈의 가운데가 비게 하는 index 찾기
+        # e.g.
+        # 27 일떄, 9/9/9 의 가운데가 비어야 함
+        # 9 일때, 3/3/3/ 의 가운데가 비어야 함
+        # 3 일때, 1/1/1/ 의 가운데가 비어야 함
+        # -> 반복적으로 index를 표시
+        index = [x for x in range(n) if (x // 3 ** i) % 3 == 1]
+        
+        # 찾은 index를 빈칸으로 변경
+        for i in index:
+            for j in index:
+                starArr[i][j] = ' '
+    return starArr
 
-for n in range(cnt):
-    index = [i for i in range(n) if (i // 3**n) % 3== 1 ]
-    for i in index:
-        for j in index:
-            star[i][j] = ' '
-print(star)
+
+num = int(input())
+    
+result = starMark(num)
+for _ in result:
+    print("".join(_))
+
