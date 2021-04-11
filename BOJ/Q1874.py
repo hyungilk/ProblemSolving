@@ -66,6 +66,34 @@ else:
     for ch in result:
         print(ch)
 
+        
+'''
+# more simpler code style
+n = int(input())
+
+stacks = []
+result = []
+cnt = 1
+true_flag = True
+
+for i in range(n):
+    num = int(input())
+    while cnt <= num:
+        stacks.append(cnt)
+        result.append('+')
+        cnt += 1
+    if stacks[-1] == num:
+        stacks.pop()
+        result.append('-')
+    else:
+        true_flag = False
+
+if true_flag == False:
+    print('NO')
+else:
+    for ch in result:
+        print(ch)
+'''
 
 
 
